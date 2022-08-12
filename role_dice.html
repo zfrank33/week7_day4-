@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>rollDice</title>
+    <style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+
+
+
+        #drivers {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #drivers td, #drivers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #drivers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #drivers tr:hover {background-color: #ddd;}
+        
+        #drivers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+
+
+
+         #getDetailButton {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+  #getDetailButton:hover {
+  background-color: #45a049;
+}
+        </style>
+  </head>
+  <body>
+   
+    <h1> Roll Dice</h1>
+
+
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+    </script> -->
+    <script>
+        //board dictionary with lists
+let board = {
+	"1": [],
+  	"2": [],
+	"3": [],
+	"4": [],
+	"5": [],
+	"6": [],
+};
+let oneScore = {
+	"1": 100,
+  	"2": 20,
+	"3": 30,
+	"4": 40,
+	"5": 50,
+	"6": 60,
+};
+let trippleScore = {
+	"1": 1000,
+  	"2": 200,
+	"3": 300,
+	"4": 400,
+	"5": 500,
+	"6": 600,
+};
+        //Roll will be random
+let totalScore = 0
+
+rollDice = ()=> {
+let dice = ["1","2","3","4","5","6"];
+let randNumber = dice[Math.floor(Math.random() * dice.length)];
+return randNumber
+}
+recordScore = ()=> {
+    for (let i = 0;i<5;i++){
+        let roll = rollDice()
+        length = board[roll].length
+    if (length == 2){
+        board[roll].push(trippleScore[roll])
+        console.log("Dice roll :" + roll)
+    }else{
+        board[roll].push(oneScore[roll])
+        console.log("Dice roll :" + roll)
+    }
+    }
+    // let roll = rollDice()
+    
+    // length = board[roll].length
+    // if (length == 2){
+    //     board[roll].push(trippleScore[roll])
+    //     console.log("Round score :" + trippleScore[roll].toString())
+    // }else{
+    //     board[roll].push(oneScore[roll])
+    //     console.log("Round score :" + oneScore[roll].toString())
+
+    // }
+//     let roundScore = {
+// 	"1": 100,
+//   	"2": 20,
+// 	"3": 30,
+// 	"4": 40,
+// 	"5": 50,
+// 	"6": 60,
+// };
+// arr = [100, 900, 230, 100]
+// total = arr.reduce((a, b) => a + b, 0)
+    let roundScore = {
+	"1":  board['1'].reduce((a, b) => a + b, 0),
+  	"2":  board['2'].reduce((a, b) => a + b, 0),
+	"3":  board['3'].reduce((a, b) => a + b, 0),
+	"4":  board['4'].reduce((a, b) => a + b, 0),
+	"5":  board['5'].reduce((a, b) => a + b, 0),
+	"6":  board['6'].reduce((a, b) => a + b, 0),
+};
+console.log("==================Round Score ==========")
+console.log(roundScore)
+
+
+for([key, val] of Object.entries(roundScore)) {
+//   console.log(key, val);
+  totalScore = totalScore+val
+}
+console.log("==================Total Score ==========")
+console.log(totalScore)
+}
+recordScore();
+recordScore();
+recordScore();
+recordScore();
+recordScore();
+
+    </script>
+  </body>
+</html>
